@@ -440,3 +440,21 @@ html.frame-away .header { translate: 0 -110%; }
 .voice__video video { width: 100%; height: auto; aspect-ratio: 614 / 572; object-fit: cover; }
 .voice__text { grid-column: 7 / 12; display: grid; gap: calc(var(--u) * 2.5); align-content: center; }
 @media (max-width: 900px) { .voice__video, .voice__text { grid-column: 1 / -1; } }
+
+/* ---------- Client work cards ---------- */
+.cw { margin-top: calc(var(--u) * 10); }
+.cw__label { margin-bottom: calc(var(--u) * 2.5); }
+.cw__grid { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
+.cw__card { list-style: none; display: grid; grid-template-rows: auto auto 1fr; gap: calc(var(--u) * 2.5); padding: clamp(1.1rem, 0.8rem + 1vw, 1.8rem);
+  border: 1px solid var(--c-line); border-radius: var(--r-node); background: var(--c-node); }
+.cw__head { display: grid; gap: 0.55rem; }
+.cw__stars { color: #f5b942; letter-spacing: 0.12em; font-size: 0.95rem; }
+.cw__client { font-size: var(--t-l); line-height: 1; }
+.cw__results { list-style: none; padding: 0; display: grid; gap: 0.55rem; }
+.cw__results li { position: relative; padding-left: 1.4rem; line-height: 1.45; }
+.cw__results li::before { content: ''; position: absolute; left: 0; top: 0.45em; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--c-auto); }
+.cw__quote { align-self: end; border-top: 1px solid var(--c-line); padding-top: calc(var(--u) * 2); display: grid; gap: 0.9rem; }
+.cw__quote p { font-size: 1.05rem; line-height: 1.5; }
+.cw__quote footer { color: var(--c-muted); }
+.cw__quote footer span { color: var(--c-fg); }
+@media (max-width: 1000px) { .cw__grid { grid-template-columns: minmax(0, 1fr); } }

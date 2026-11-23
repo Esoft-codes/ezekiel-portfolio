@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Node } from '@/components/Node';
 import { Btn } from '@/components/Btn';
 import { ContactForm } from '@/components/ContactForm';
-import { about, automation, creative, process, projects, site, testimonial, tools, workbench } from '@/data/site';
+import { about, automation, clientWork, creative, process, projects, site, testimonial, tools, workbench } from '@/data/site';
 
 export default function Home() {
   return (
@@ -171,6 +171,26 @@ export default function Home() {
             <p className="muted body-copy">Press play for sound. If you want to hear how a project like yours would go, the quickest way is to ask me directly.</p>
             <div><a className="btn btn--ghost" href="#contact" data-fill><span className="btn__fill" aria-hidden="true" />Let’s work together<span className="btn__arrow" aria-hidden="true">→</span></a></div>
           </div>
+        </div>
+
+        <div className="cw">
+          <h3 className="mono muted cw__label">Client work</h3>
+          <ul className="cw__grid">
+            {clientWork.map((c, i) => (
+              <li className="cw__card" key={c.client} data-reveal="up" data-delay={String(i * 0.08)}>
+                <div className="cw__head">
+                  <span className="cw__stars" aria-label="5 out of 5 stars">★★★★★</span>
+                  <h4 className="cw__client voice-auto">{c.client}</h4>
+                  <p className="mono muted">{c.industry} · {c.services}</p>
+                </div>
+                <ul className="cw__results">{c.results.map((r) => <li key={r}>{r}</li>)}</ul>
+                <blockquote className="cw__quote">
+                  <p>“{c.quote}”</p>
+                  <footer className="mono"><span>{c.author}</span>, {c.role}</footer>
+                </blockquote>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

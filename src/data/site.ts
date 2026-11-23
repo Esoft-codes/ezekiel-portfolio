@@ -135,6 +135,49 @@ export const testimonial = {
   minutes: '1:31',
 };
 
+// Client work and written testimonials, copied from the Work Experience slides in Ezekiel's intro video.
+export const clientWork = [
+  {
+    client: 'Summit Realty Group',
+    industry: 'Real estate',
+    services: 'CRM setup and optimization, funnel design and automation',
+    results: [
+      'Boosted qualified leads',
+      'CRM designed for clear, organized tracking of leads and opportunities',
+      'Automated new listing alerts and appointment scheduling',
+    ],
+    quote: 'Ezekiel optimized our CRM and sales funnels to perfection. Our lead volume and conversion rate have both increased significantly. Real pro at what he does.',
+    author: 'Scott Peterson',
+    role: 'Summit Realty Group',
+  },
+  {
+    client: 'Nancy Zugcherswert',
+    industry: 'Coaching',
+    services: 'Advanced funnel optimization and setup',
+    results: [
+      'Revamped an underperforming funnel for higher conversion rates',
+      'Fixed and optimized the masterclass funnel in under 3 hours',
+      'Streamlined attendee booking and automated reminders',
+    ],
+    quote: 'Working with Ezekiel was a revelation in funnel optimization. He fixed my broken funnel fast and set up my masterclass to run seamlessly. I\'m seeing incredible results already. Highly recommended.',
+    author: 'Nancy Zugcherswert',
+    role: 'Business coach',
+  },
+  {
+    client: 'CrossFit Elite Gym',
+    industry: 'Fitness and health',
+    services: 'Lead generation funnel optimization',
+    results: [
+      'Generated over 300 qualified leads in 45 days',
+      'Custom landing page converted visitors at 38%',
+      'Automated SMS follow-ups scheduled for maximum reactivation',
+    ],
+    quote: 'Ezekiel built an effective funnel that brought in over 300 qualified leads for our gym. His automated follow-up system is top-notch. Outstanding work.',
+    author: 'Jason Matthews',
+    role: 'CrossFit Elite Gym owner',
+  },
+];
+
 export const workbench: Shot[] = [
   img('n8n-asmr-shorts', 1080, 420, 'n8n workflow that writes an idea, generates clips and sound, stitches the video and uploads it to YouTube', 'n8n: AI Shorts pipeline, idea to YouTube upload'),
   img('n8n-security-digest', 1080, 423, 'n8n workflow with three lanes that build daily security, privacy and compliance newsletters', 'n8n: three daily AI news digests'),
