@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Node } from '@/components/Node';
 import { Btn } from '@/components/Btn';
 import { ContactForm } from '@/components/ContactForm';
-import { about, automation, creative, process, projects, site, tools, workbench } from '@/data/site';
+import { about, automation, creative, process, projects, site, testimonial, tools, workbench } from '@/data/site';
 
 export default function Home() {
   return (
@@ -147,6 +147,30 @@ export default function Home() {
             <span className="preview__type voice-create" />
           </div>
           <span className="preview__cap mono" />
+        </div>
+      </section>
+
+      {/* TESTIMONIAL: a client, on camera */}
+      <section className="voice wrap" aria-labelledby="voice-title">
+        <div className="sec-head">
+          <Node type="Webhook" name="Client feedback received" ms="0.4s" />
+          <h2 id="voice-title" className="h2 voice-auto" data-split="lines">What clients say.</h2>
+        </div>
+        <div className="grid voice__grid">
+          <figure className="voice__video" data-reveal="up">
+            <div className="video-frame">
+              <video src={testimonial.video} poster={testimonial.poster} width={testimonial.w} height={testimonial.h}
+                controls playsInline preload="none" aria-label="Video testimonial from a client about working with Ezekiel" />
+            </div>
+            <figcaption className="mono muted">
+              {testimonial.name ? `${testimonial.name}${testimonial.role ? ', ' + testimonial.role : ''}` : 'A client'} · video testimonial · {testimonial.minutes}
+            </figcaption>
+          </figure>
+          <div className="voice__text" data-reveal="up" data-delay="0.1">
+            <p className="lede">The most useful thing I can show you is a client talking about the work in their own words, unedited.</p>
+            <p className="muted body-copy">Press play for sound. If you want to hear how a project like yours would go, the quickest way is to ask me directly.</p>
+            <div><a className="btn btn--ghost" href="#contact" data-fill><span className="btn__fill" aria-hidden="true" />Let’s work together<span className="btn__arrow" aria-hidden="true">→</span></a></div>
+          </div>
         </div>
       </section>
 

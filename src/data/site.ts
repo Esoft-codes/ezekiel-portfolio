@@ -123,6 +123,18 @@ export const tools = [
 const img = (src: string, w: number, h: number, alt: string, caption?: string): Shot => ({ src: `/img/${src}.webp`, w, h, alt, caption });
 const vid = (name: string, w: number, h: number, alt: string, caption?: string): Shot => ({ src: `/img/v-${name}.webp`, video: `/video/${name}.mp4`, w, h, alt, caption });
 
+// Client video testimonial, cut from the client section of Ezekiel's intro video.
+// Add the client's name and role below once confirmed; leave empty to show "A client".
+export const testimonial = {
+  name: '',
+  role: '',
+  video: '/video/testimonial.mp4',
+  poster: '/img/v-testimonial.webp',
+  w: 614,
+  h: 572,
+  minutes: '1:31',
+};
+
 export const workbench: Shot[] = [
   img('n8n-asmr-shorts', 1080, 420, 'n8n workflow that writes an idea, generates clips and sound, stitches the video and uploads it to YouTube', 'n8n: AI Shorts pipeline, idea to YouTube upload'),
   img('n8n-security-digest', 1080, 423, 'n8n workflow with three lanes that build daily security, privacy and compliance newsletters', 'n8n: three daily AI news digests'),
