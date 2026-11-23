@@ -474,5 +474,5 @@ html.frame-away .header { translate: 0 -110%; }
 .booking { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--gutter); border-top: 1px solid var(--c-line); padding-top: calc(var(--u) * 5); }
 .booking__head { display: grid; gap: 1rem; align-content: start; }
 .booking__title { font-size: var(--t-l); line-height: 1; }
-.booking__cal { min-height: 640px; border: 1px solid var(--c-line); border-radius: var(--r-node); background: var(--c-node); overflow: auto; }
-@media (max-width: 900px) { .booking { grid-template-columns: minmax(0, 1fr); } .booking__cal { min-height: 720px; } }
+.booking__cal { height: 700px; border: 1px solid var(--c-line); border-radius: var(--r-node); background: var(--c-node); overflow: auto; }
+@media (max-width: 900px) { .booking { grid-template-columns: minmax(0, 1fr); } .booking__cal { height: 760px; } }

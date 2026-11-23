@@ -265,13 +265,13 @@ export default function Home() {
         <div className="grid contact__grid">
           <div className="contact__direct">
             <p className="lede">An AI assistant, an automated workflow, a connected CRM or AI video: tell me what you need and let’s see what’s possible.</p>
-            {site.calLink && <div><a className="btn btn--solid" href="#cal-inline" data-fill data-no-transition><span className="btn__fill" aria-hidden="true" />Book a free 15-minute audit<span className="btn__arrow" aria-hidden="true">→</span></a></div>}
+            {site.bookingUrl && <div><a className="btn btn--solid" href="#booking-cal" data-fill data-no-transition><span className="btn__fill" aria-hidden="true" />Book a free 15-minute audit<span className="btn__arrow" aria-hidden="true">→</span></a></div>}
             <a className="contact__email link" href={`mailto:${site.email}`}>{site.email}</a>
             <p className="mono"><a className="link tap" href={site.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a></p>
           </div>
           <ContactForm email={site.email} webhook={site.formWebhook || undefined} />
         </div>
-        {site.calLink && <Booking calLink={site.calLink} />}
+        {site.bookingUrl && <Booking url={site.bookingUrl} />}
         <footer className="footer mono">
           <span>Workflow finished · status success</span>
           <span>© 2026 {site.name}</span>

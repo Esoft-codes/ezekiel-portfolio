@@ -42,8 +42,8 @@ export const site = {
   linkedin: 'https://www.linkedin.com/in/ezekiel-efemena-b3b007354',
   location: 'Lagos, Nigeria',
   // Contact: paste your links here. Empty values keep the old behaviour.
-  // calLink: the part after cal.com/, e.g. 'ezekiel/automation-audit'
-  calLink: '',
+  // bookingUrl: Calendly event link shown as the inline booking calendar
+  bookingUrl: 'https://calendly.com/ezekielefemena0/free-15-minute-automation-audit',
   // formWebhook: your n8n or Make webhook URL that receives contact form submissions
   formWebhook: 'https://hook.us2.make.com/4o9ote0ehcsb8owjx5cwsoupmhy1m9l5',
   since: 'January 2022',
