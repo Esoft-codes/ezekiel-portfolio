@@ -1,0 +1,40 @@
+:root {
+  --c-bg: #0c0d10;
+  --c-node: #15171c;
+  --c-fg: #eceef1;
+  --c-muted: #959ca8;
+  --c-line: #262a33;
+  --c-auto: #4c86ff;
+  --c-create: #a794ff;
+  --c-accent: var(--c-auto);
+  --c-curtain: #0c0d10;
+  --lane: var(--c-auto);
+
+  --f-display: var(--font-archivo), 'Arial Narrow', system-ui, sans-serif;
+  --f-body: var(--font-archivo), system-ui, sans-serif;
+  --f-mono: var(--font-mono), ui-monospace, monospace;
+
+  --t-mega: clamp(3.4rem, 0.6rem + 12.4vw, 13.5rem);
+  --t-xl: clamp(2.4rem, 1.3rem + 4.6vw, 5.8rem);
+  --t-l: clamp(1.65rem, 1.25rem + 1.8vw, 2.9rem);
+  --t-m: clamp(1.2rem, 1.08rem + 0.55vw, 1.6rem);
+  --t-body: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+  --t-s: 0.875rem;
+  --t-xs: 0.75rem;
+
+  --u: clamp(0.5rem, 0.35rem + 0.6vw, 1rem);
+  --gutter: clamp(1rem, 0.6rem + 1.6vw, 2.5rem);
+  --wire-x: calc(var(--gutter) * 0.75);
+  --pad-l: calc(var(--wire-x) + clamp(1.5rem, 1rem + 2vw, 3.5rem));
+  --cols: 12;
+  --radius: 0px;
+  --r-node: 10px;
+
+  --z-gl: 0;
+  --z-content: 1;
+  --z-wire: 2;
+  --z-header: 50;
+  --z-cursor: 80;
+  --z-curtain: 90;
+  --z-loader: 100;
+}

@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ezekiel Efemena Atevafo: portfolio
 
-## Getting Started
+A Next.js site built around one idea: the portfolio runs like one of your workflows. You are the
+trigger, each section is a node, and as visitors scroll an item travels down the wire on the left
+and each node reports success. The services split into two lanes (automation in blue, creative
+in violet), and the 404 page is an n8n-style node error.
 
-First, run the development server:
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # local preview at http://localhost:3000
+npm run build      # static site in out/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Edit the content
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Every word, project and image path lives in `src/data/site.ts`. Images are in `public/img/`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To replace a placeholder project cover (projects 02, 05 and 06), add an image to `public/img/`
+and give the project a `cover` and `gallery` entries the same way project 01 does, then remove
+`placeholderMedia: true`.
 
-## Learn More
+## Deploy
 
-To learn more about Next.js, take a look at the following resources:
+The build is a plain static site (`out/`), so any static host works:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Vercel: `npx vercel --prod`
+- Netlify: drag the `out/` folder into app.netlify.com/drop, or `npx netlify deploy --prod --dir out`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+When you have the real domain, change `url` in `src/data/site.ts` and rebuild, so canonical
+links, the sitemap and social previews point to it.
 
-## Deploy on Vercel
+## Contact form
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The form opens the visitor's email app with the message filled in. To receive messages without
+that step, connect a form service (for example Formspree) in `src/components/ContactForm.tsx`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Stack
+
+Next.js 16 (static export), GSAP + Lenis for motion, Archivo (variable width) and Martian Mono,
+self-hosted. Design notes are in `DESIGN.md`.
