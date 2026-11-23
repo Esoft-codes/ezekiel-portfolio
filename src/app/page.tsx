@@ -2,7 +2,8 @@ import Image from 'next/image';
 import { Node } from '@/components/Node';
 import { Btn } from '@/components/Btn';
 import { ContactForm } from '@/components/ContactForm';
-import { about, automation, clientWork, creative, process, projects, site, testimonial, tools, workbench } from '@/data/site';
+import { Booking } from '@/components/Booking';
+import { about, automation, clientWork, creative, handover, process, projects, site, testimonial, tools, workbench } from '@/data/site';
 
 export default function Home() {
   return (
@@ -226,6 +227,17 @@ export default function Home() {
             </li>
           ))}
         </ol>
+        <div className="handover">
+          <h3 className="mono muted handover__label">What you get at handover</h3>
+          <ul className="handover__grid">
+            {handover.map((h, i) => (
+              <li key={h.title} data-reveal="up" data-delay={String(i * 0.08)}>
+                <h4 className="voice-auto">{h.title}</h4>
+                <p className="muted">{h.text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
       {/* TOOLS */}
@@ -253,11 +265,13 @@ export default function Home() {
         <div className="grid contact__grid">
           <div className="contact__direct">
             <p className="lede">An AI assistant, an automated workflow, a connected CRM or AI video: tell me what you need and let’s see what’s possible.</p>
+            {site.calLink && <div><a className="btn btn--solid" href="#cal-inline" data-fill data-no-transition><span className="btn__fill" aria-hidden="true" />Book a free 15-minute audit<span className="btn__arrow" aria-hidden="true">→</span></a></div>}
             <a className="contact__email link" href={`mailto:${site.email}`}>{site.email}</a>
             <p className="mono"><a className="link tap" href={site.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a></p>
           </div>
-          <ContactForm email={site.email} />
+          <ContactForm email={site.email} webhook={site.formWebhook || undefined} />
         </div>
+        {site.calLink && <Booking calLink={site.calLink} />}
         <footer className="footer mono">
           <span>Workflow finished · status success</span>
           <span>© 2026 {site.name}</span>

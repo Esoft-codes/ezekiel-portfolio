@@ -458,3 +458,21 @@ html.frame-away .header { translate: 0 -110%; }
 .cw__quote footer { color: var(--c-muted); }
 .cw__quote footer span { color: var(--c-fg); }
 @media (max-width: 1000px) { .cw__grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- Handover ---------- */
+.handover { margin-top: calc(var(--u) * 10); border-top: 1px solid var(--c-line); padding-top: calc(var(--u) * 3); }
+.handover__label { margin-bottom: calc(var(--u) * 3); }
+.handover__grid { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
+.handover__grid li { list-style: none; display: grid; gap: 0.8rem; align-content: start; padding-left: 1.1rem; border-left: 2px solid var(--c-auto); }
+.handover__grid h4 { font-size: var(--t-m); line-height: 1.1; font-weight: 700; }
+.handover__grid p { max-width: 34ch; }
+@media (max-width: 900px) { .handover__grid { grid-template-columns: minmax(0, 1fr); row-gap: calc(var(--u) * 4); } }
+
+/* ---------- Form spam trap + booking ---------- */
+.trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.btn:disabled { opacity: 0.6; cursor: progress; }
+.booking { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--gutter); border-top: 1px solid var(--c-line); padding-top: calc(var(--u) * 5); }
+.booking__head { display: grid; gap: 1rem; align-content: start; }
+.booking__title { font-size: var(--t-l); line-height: 1; }
+.booking__cal { min-height: 640px; border: 1px solid var(--c-line); border-radius: var(--r-node); background: var(--c-node); overflow: auto; }
+@media (max-width: 900px) { .booking { grid-template-columns: minmax(0, 1fr); } .booking__cal { min-height: 720px; } }

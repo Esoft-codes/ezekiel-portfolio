@@ -41,6 +41,11 @@ export const site = {
   email: 'ezekielefemena0@gmail.com',
   linkedin: 'https://www.linkedin.com/in/ezekiel-efemena-b3b007354',
   location: 'Lagos, Nigeria',
+  // Contact: paste your links here. Empty values keep the old behaviour.
+  // calLink: the part after cal.com/, e.g. 'ezekiel/automation-audit'
+  calLink: '',
+  // formWebhook: your n8n or Make webhook URL that receives contact form submissions
+  formWebhook: '',
   since: 'January 2022',
   education: 'BSc, University of Lagos, 2023',
   headline: 'Building smarter businesses through AI, automation and creative technology.',
@@ -111,6 +116,13 @@ export const process = [
   { title: 'Strategize', text: 'I pick the tools and the approach that fit the problem, not the other way round.' },
   { title: 'Build', text: 'I build and connect the workflows, agents, integrations or creative assets.' },
   { title: 'Test and deliver', text: 'I run it, fix what breaks, and hand over a result that matches what we agreed.' },
+];
+
+// What clients get at handover (shown under "How I work").
+export const handover = [
+  { title: 'You own everything', text: 'Workflows, agents and automations are built in your own n8n, Make, Vapi or GoHighLevel accounts. Nothing is locked inside mine.' },
+  { title: 'Documented and explained', text: 'You get a written guide to how it works and a recorded walkthrough, so your team can run it and change it without me.' },
+  { title: '30 days of bug fixes', text: 'If something I built breaks in the first 30 days after launch, I fix it at no cost.' },
 ];
 
 export const tools = [
