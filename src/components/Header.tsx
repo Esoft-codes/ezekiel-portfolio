@@ -6,6 +6,7 @@ import { site } from '@/data/site';
 export function Header() {
   const path = usePathname() || '/';
   const onWork = path.startsWith('/work');
+  const onBlog = path.startsWith('/blog');
   return (
     <header className="header">
       <Link href="/" className="brand" data-title="Home">
@@ -15,6 +16,7 @@ export function Header() {
       <nav className="nav" aria-label="Main">
         <a className="draw" href="/#work" aria-current={onWork ? 'page' : undefined}>Work</a>
         <a className="draw" href="/#about">About</a>
+        <a className="draw" href="/blog/" aria-current={onBlog ? 'page' : undefined}>Blog</a>
         <a className="draw" href="/#contact">Contact</a>
       </nav>
     </header>

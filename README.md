@@ -21,6 +21,17 @@ To replace a placeholder project cover (projects 02, 05 and 06), add an image to
 and give the project a `cover` and `gallery` entries the same way project 01 does, then remove
 `placeholderMedia: true`.
 
+## Post to the blog (from your phone or browser, no setup)
+
+1. Open github.com/Esoft-codes/ezekiel-portfolio and go into `content/blog`.
+2. Open `_TEMPLATE.md`, click the copy button, then go back and click **Add file → Create new file**.
+3. Name it with the date and a short title, like `2026-11-24-my-first-n8n-build.md`. The part after the date becomes the post's web address.
+4. Paste the template, change the title, date, description and tags, and write the post below the `---` line.
+5. Click **Commit changes**. The post is live on /blog about a minute later.
+
+Pictures: upload them to `public/blog/` (Add file → Upload files), then use `![what it shows](/blog/picture.jpg)` in the post.
+To hold a post back, add `draft: true` under the date. To delete a post, delete its file.
+
 ## Deploy
 
 The build is a plain static site (`out/`), so any static host works:
