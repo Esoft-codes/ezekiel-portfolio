@@ -385,3 +385,9 @@ html.frame-away .header { translate: 0 -110%; }
   .case__gallery .shot__frame img { width: 720px; max-width: none; }
   .lost { align-content: start; padding-top: calc(var(--u) * 16); }
 }
+
+/* ---------- Video work ---------- */
+.video-frame { background: #000 !important; border: 1px solid var(--c-line) !important; border-radius: 6px !important; overflow: clip; }
+.video-frame video { display: block; width: 100%; height: auto; max-height: 80vh; background: #000; }
+.case__gallery .video-frame { max-width: 60rem; }
+@media (max-width: 600px) { .case__gallery .video-frame video { width: 100%; max-width: 100%; } }

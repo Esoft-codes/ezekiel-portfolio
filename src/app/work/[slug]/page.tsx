@@ -38,9 +38,15 @@ export default async function Work({ params }: { params: Promise<{ slug: string 
 
       <figure className="case__hero open">
         {p.cover ? (
+          p.cover.video ? (
+            <div className="shot__frame video-frame">
+              <video src={p.cover.video} poster={p.cover.src} width={p.cover.w} height={p.cover.h} controls playsInline preload="metadata" aria-label={p.cover.alt} />
+            </div>
+          ) : (
           <div className="shot__frame">
             <Image src={p.cover.src} alt={p.cover.alt} width={p.cover.w} height={p.cover.h} sizes="95vw" loading="eager" fetchPriority="high" unoptimized />
           </div>
+          )
         ) : (
           <div className="typecover" role="img" aria-label={`${p.title}: title card`}>
             <span className={`typecover__t ${voice}`}>{p.short}</span>
@@ -72,7 +78,10 @@ export default async function Work({ params }: { params: Promise<{ slug: string 
         <div className="case__gallery">
           {p.gallery.map((s) => (
             <figure className="shot" key={s.src} data-reveal="up">
-              <div className="shot__frame"><Image src={s.src} alt={s.alt} width={s.w} height={s.h} sizes="90vw" unoptimized /></div>
+              <div className={`shot__frame${s.video ? ' video-frame' : ''}`}>
+                {s.video ? <video src={s.video} poster={s.src} width={s.w} height={s.h} controls playsInline preload="none" aria-label={s.alt} />
+                  : <Image src={s.src} alt={s.alt} width={s.w} height={s.h} sizes="90vw" unoptimized />}
+              </div>
               {s.caption && <figcaption className="mono">{s.caption}</figcaption>}
             </figure>
           ))}

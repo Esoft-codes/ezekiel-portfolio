@@ -2,13 +2,13 @@
 //
 // Assumptions and placeholders (also listed in the hand-off message):
 // - url: the Vercel address; change it when a custom domain is added.
-// - Projects 02 (outbound caller), 05 (cinematic video) and 06 (product ads) have no media yet:
-//   they render typographic covers and carry `placeholder: true` on their media.
+// - Project 02 (outbound caller) has no media yet: it renders a typographic cover.
+// - Creative videos (projects 05 to 07) come from the AI VIDEO SAMPLES and Hygen Samples Drive folders.
 // - Screenshots are real builds from OneDrive. Client names, emails and the client's business
 //   details are blurred or cropped out.
 // - The contact form opens the visitor's email app (mailto). Wire it to a form service later.
 
-export type Shot = { src: string; alt: string; w: number; h: number; caption?: string };
+export type Shot = { src: string; alt: string; w: number; h: number; caption?: string; video?: string };
 
 export type Project = {
   slug: string;
@@ -121,6 +121,7 @@ export const tools = [
 ];
 
 const img = (src: string, w: number, h: number, alt: string, caption?: string): Shot => ({ src: `/img/${src}.webp`, w, h, alt, caption });
+const vid = (name: string, w: number, h: number, alt: string, caption?: string): Shot => ({ src: `/img/v-${name}.webp`, video: `/video/${name}.mp4`, w, h, alt, caption });
 
 export const workbench: Shot[] = [
   img('n8n-asmr-shorts', 1080, 420, 'n8n workflow that writes an idea, generates clips and sound, stitches the video and uploads it to YouTube', 'n8n: AI Shorts pipeline, idea to YouTube upload'),
@@ -206,14 +207,16 @@ export const projects: Project[] = [
     short: 'Cinematic AI video',
     category: 'Creative AI, video production',
     branch: 'Creative',
-    stack: ['Google Flow', 'AI creative tools'],
-    summary: 'Visual stories built from generated scenes, with consistent characters, cinematic direction and a real narrative arc.',
-    chain: ['Script', 'Visual flow', 'Shot prompts', 'Generate', 'Edit', 'Deliver'],
-    context: 'AI video tends to look like a pile of unrelated clips. Viewers notice when characters change face from shot to shot.',
-    idea: 'Direct it like film: break the script into a shot-by-shot visual flow first, keep characters locked across shots, then generate.',
-    shipped: 'AI-assisted storytelling videos combining generated scenes, character consistency, cinematic direction and narrative development.',
-    gallery: [],
-    placeholderMedia: true,
+    stack: ['Google Flow', 'Veo', 'CapCut'],
+    summary: 'Short cinematic films built from generated shots: one subject, one light, one camera language held from the first frame to the last.',
+    chain: ['Script', 'Visual flow', 'Shot prompts', 'Generate', 'Edit and sound', 'Deliver'],
+    context: 'AI video tends to look like a pile of unrelated clips. Viewers notice when the light, the lens or the subject changes from shot to shot.',
+    idea: 'Direct it like film: break the idea into a shot-by-shot visual flow first, lock the subject and the lighting, then generate and cut on movement.',
+    shipped: 'A 15-second cinematic piece of a leopard stalking out of a steel vault, and a 30-second coffee sequence that follows the bean from roast to the pour.',
+    cover: vid('leopard', 1280, 720, 'A leopard walks out of a dark steel vault toward the camera, lit from above'),
+    gallery: [
+      vid('coffee', 640, 360, 'Coffee beans, ground coffee, capsules and an espresso pouring into a cup', 'Coffee process: roast, grind, capsule, pour'),
+    ],
   },
   {
     slug: 'ai-product-ads',
@@ -222,13 +225,36 @@ export const projects: Project[] = [
     short: 'Product ads',
     category: 'AI video, digital marketing',
     branch: 'Creative',
-    stack: ['AI video generation', 'Creative production tools'],
-    summary: 'Promotional content that shows the product, carries the brand and is cut for the platforms people actually watch.',
-    chain: ['Brief', 'Concept', 'Generate', 'Cut for platform', 'Deliver'],
-    context: 'Small brands need a steady stream of video ads but can’t book a studio for each one.',
-    idea: 'Produce the ad with AI from a clear concept, then cut versions for each platform.',
-    shipped: 'AI-made promotional content that showcases products, communicates brand identity and works on social platforms.',
-    gallery: [],
-    placeholderMedia: true,
+    stack: ['Google Flow', 'Veo', 'AI video generation'],
+    summary: 'Product ads made entirely with AI: studio hero shots, lifestyle scenes and end cards, cut short for social feeds.',
+    chain: ['Brief', 'Concept', 'Hero shots', 'Lifestyle shots', 'End card', 'Cut for platform'],
+    context: 'Small brands need a steady stream of video ads but cannot book a studio, a model and a crew for each product.',
+    idea: 'Treat every product like a studio shoot: a hero angle, a material close-up, the product in use, then a clean end card with the name and one line.',
+    shipped: 'A set of short ads: a perfume bottle rising out of water, AURA wireless earbuds and a smartwatch in studio light, a mascara spot, and an earbuds lifestyle ad with on-screen titles.',
+    cover: vid('perfume', 1280, 720, 'A blue perfume bottle on wet rock with water splashing around it'),
+    gallery: [
+      vid('earbuds', 1280, 720, 'AURA wireless earbuds case on a dark studio surface with the product name', 'AURA earbuds: studio spot with end card'),
+      vid('watch', 1280, 720, 'Close-up of a black smartwatch face in soft daylight', 'AURA watch: material close-ups to wrist shot'),
+      vid('earbuds-lifestyle', 1280, 720, 'A woman working at a cafe laptop wearing white earbuds, with on-screen titles', 'Earbuds lifestyle ad with on-screen titles'),
+      vid('mascara', 752, 416, 'A hand opening a brown mascara tube to show the brush', 'Mascara: product reveal to application'),
+    ],
+  },
+  {
+    slug: 'ai-avatar-presenters',
+    n: '07',
+    title: 'AI avatar news presenters',
+    short: 'AI presenters',
+    category: 'AI video, avatar production',
+    branch: 'Creative',
+    stack: ['HeyGen', 'AI video generation'],
+    summary: 'News-style explainer videos with AI presenters: an anchor, a studio set, B-roll panels and lower thirds, with no camera crew.',
+    chain: ['Script', 'Avatar and voice', 'Studio scene', 'B-roll panel', 'Lower third', 'Export'],
+    context: 'A news-style channel needs a presenter on screen every day, but filming an anchor for each update is slow and expensive.',
+    idea: 'Build a reusable studio: an AI anchor, a consistent set and a branded layout, so each new script becomes a finished segment.',
+    shipped: 'Presenter segments in a news-desk layout, with a story panel beside the anchor and a headline lower third.',
+    cover: vid('presenter', 1280, 720, 'An AI news anchor standing at a glass desk in a blue television studio'),
+    gallery: [
+      vid('presenter-eu', 1280, 720, 'Split layout with a meeting room on the left and an AI anchor on the right, above a headline bar', 'News-desk layout with story panel and headline'),
+    ],
   },
 ];

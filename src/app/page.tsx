@@ -115,7 +115,7 @@ export default function Home() {
       {/* WORK: execution log */}
       <section id="work" className="work wrap" aria-labelledby="work-title">
         <div className="sec-head">
-          <Node type="Merge" name="Selected work · 6 executions" ms="0.3s" />
+          <Node type="Merge" name={`Selected work · ${projects.length} executions`} ms="0.3s" />
           <h2 id="work-title" className="h2 voice-auto" data-split="lines">Turning ideas into working solutions.</h2>
           <p className="lede muted" data-reveal="up">Automation systems, AI-powered business tools and creative production, each one a real build.</p>
         </div>
