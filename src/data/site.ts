@@ -1,7 +1,7 @@
 // All visible content lives here. Swap in new material without touching markup.
 //
 // Assumptions and placeholders (also listed in the hand-off message):
-// - url: ezekielatevafo.com is a suggested domain, not registered yet.
+// - url: the Vercel address; change it when a custom domain is added.
 // - Projects 02 (outbound caller), 05 (cinematic video) and 06 (product ads) have no media yet:
 //   they render typographic covers and carry `placeholder: true` on their media.
 // - Screenshots are real builds from OneDrive. Client names, emails and the client's business
@@ -35,7 +35,7 @@ export const site = {
   role: 'AI Automation & Integration Specialist, AI Creative Producer',
   roleA: 'AI Automation & Integration Specialist',
   roleB: 'AI Creative Producer',
-  url: 'https://ezekielatevafo.com',
+  url: 'https://ezekiel-portfolio-cyan.vercel.app',
   description:
     'Ezekiel Efemena Atevafo builds AI voice agents, automated workflows and connected CRMs, and produces AI video for brands. Based in Lagos, working worldwide.',
   email: 'ezekielefemena0@gmail.com',
