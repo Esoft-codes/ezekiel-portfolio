@@ -6,7 +6,7 @@ import { fmtDate, getPosts } from '@/lib/blog';
 export const metadata: Metadata = {
   title: 'Blog',
   description: 'Notes from Ezekiel Efemena Atevafo on AI automation, voice agents, integrations and AI video production: what he builds, how, and what he learns.',
-  alternates: { types: { 'application/rss+xml': '/blog/rss.xml' } },
+  alternates: { canonical: './', types: { 'application/rss+xml': '/blog/rss.xml' } },
 };
 
 export default function Blog() {
