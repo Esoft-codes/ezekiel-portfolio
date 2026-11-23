@@ -13,7 +13,7 @@ export default function Home() {
         <div className="grid hero__grid">
           <div className="hero__text">
             <h1 id="hero-title" className="hero__name voice-auto">
-              <span className="mask"><span className="rise">Ezekiel Efemena</span></span>
+              <span className="mask"><span className="rise">Ezekiel Efemena</span></span>{' '}
               <span className="mask"><span className="rise" style={{ animationDelay: '0.08s' }}>Atevafo</span></span>
             </h1>
             <p className="hero__roles mono enter" style={{ animationDelay: '0.3s' }}>
