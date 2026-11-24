@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image', images: ['/og.png'] },
 };
 
-export const viewport: Viewport = { themeColor: '#0c0d10' };
+export const viewport: Viewport = { themeColor: '#131210' };
 
 const flags = `document.documentElement.classList.add('js');if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('motion')`;
 

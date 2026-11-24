@@ -1,13 +1,13 @@
 :root {
-  --c-bg: #0c0d10;
-  --c-node: #15171c;
-  --c-fg: #eceef1;
-  --c-muted: #959ca8;
-  --c-line: #262a33;
-  --c-auto: #4c86ff;
-  --c-create: #a794ff;
+  --c-bg: #131210;
+  --c-node: #1c1a17;
+  --c-fg: #f3efe8;
+  --c-muted: #a8a296;
+  --c-line: #2e2b27;
+  --c-auto: #ff6b2c;
+  --c-create: #ff6b2c;
   --c-accent: var(--c-auto);
-  --c-curtain: #0c0d10;
+  --c-curtain: #131210;
   --lane: var(--c-auto);
 
   --f-display: var(--font-archivo), 'Arial Narrow', system-ui, sans-serif;

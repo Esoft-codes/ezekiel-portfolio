@@ -10,7 +10,7 @@ export function Booking({ url }: { url: string }) {
     const el = box.current;
     if (!el) return;
     let done = false;
-    const embedUrl = `${url}?hide_gdpr_banner=1&hide_landing_page_details=1&background_color=15171c&text_color=f2f2ee&primary_color=4c86ff`;
+    const embedUrl = `${url}?hide_gdpr_banner=1&hide_landing_page_details=1&background_color=1c1a17&text_color=f3efe8&primary_color=ff6b2c`;
     const init = () => {
       const w = window as unknown as { Calendly?: CalendlyApi };
       if (w.Calendly) { el.innerHTML = ''; w.Calendly.initInlineWidget({ url: embedUrl, parentElement: el }); }
