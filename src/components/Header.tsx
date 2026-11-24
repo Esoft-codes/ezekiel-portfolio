@@ -17,7 +17,7 @@ export function Header() {
         <a className="draw" href="/#work" aria-current={onWork ? 'page' : undefined}>Work</a>
         <a className="draw" href="/#about">About</a>
         <a className="draw" href="/blog/" aria-current={onBlog ? 'page' : undefined}>Blog</a>
-        <a className="draw" href="/#contact">Contact</a>
+        <a className="talk" href="/#contact">Let’s talk <span aria-hidden="true">→</span></a>
       </nav>
     </header>
   );

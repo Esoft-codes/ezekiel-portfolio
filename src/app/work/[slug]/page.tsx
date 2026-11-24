@@ -56,12 +56,13 @@ export default async function Work({ params }: { params: Promise<{ slug: string 
       </figure>
 
       <div className="grid case__body">
-        <section className="case__block"><h2 className="mono">Context</h2><p data-reveal="up">{p.context}</p></section>
-        <section className="case__block"><h2 className="mono">The idea</h2><p data-reveal="up">{p.idea}</p></section>
+        <section className="case__block"><h2 className="mono">The problem</h2><p data-reveal="up">{p.context}</p></section>
+        <section className="case__block"><h2 className="mono">The approach</h2><p data-reveal="up">{p.idea}</p></section>
         <section className="case__block"><h2 className="mono">How it works</h2>
           <ol className="case__steps" data-reveal="up">{p.chain.map((c) => <li key={c}>{c}</li>)}</ol>
         </section>
-        <section className="case__block"><h2 className="mono">What shipped</h2><p data-reveal="up">{p.shipped}</p></section>
+        <section className="case__block"><h2 className="mono">What I built</h2><p data-reveal="up">{p.shipped}</p></section>
+        <section className="case__block case__result"><h2 className="mono">The result</h2><p data-reveal="up">{p.result}</p></section>
         {p.placeholderMedia && (
           <p className="case__block note mono">Media coming soon: finished videos and demo recordings for this project will be added here.</p>
         )}
@@ -80,6 +81,15 @@ export default async function Work({ params }: { params: Promise<{ slug: string 
           ))}
         </div>
       )}
+
+      <aside className="ask" aria-labelledby="ask-title">
+        <h2 id="ask-title" className={`ask__t ${voice}`}>Want something like this for your business?</h2>
+        <p className="muted">Book a free 15-minute call. We’ll look at one process and whether it can run on its own.</p>
+        <div className="ask__cta">
+          <a className="btn btn--solid" href="/#contact" data-fill><span className="btn__fill" aria-hidden="true" />Book a free 15-minute audit<span className="btn__arrow" aria-hidden="true">→</span></a>
+          <a className="btn btn--ghost" href="/#work" data-fill><span className="btn__fill" aria-hidden="true" />See all projects<span className="btn__arrow" aria-hidden="true">→</span></a>
+        </div>
+      </aside>
 
       <nav className={`next${next.branch === 'Creative' ? ' lane-create' : ''}`} aria-label="Next project">
         <span className="mono muted">Next project</span>

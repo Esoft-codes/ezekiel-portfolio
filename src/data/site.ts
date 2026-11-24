@@ -26,6 +26,8 @@ export type Project = {
   cover?: Shot;
   gallery: Shot[];
   placeholderMedia?: boolean;
+  featured?: boolean; // shown as a large card on the homepage
+  result: string; // what the client has now (no invented numbers)
 };
 
 export const site = {
@@ -49,6 +51,10 @@ export const site = {
   since: 'January 2022',
   education: 'BSc, University of Lagos, 2023',
   headline: 'Building smarter businesses through AI, automation and creative technology.',
+  // Hero: the outcome a business owner gets, said in one breath.
+  heroTitle: 'AI systems that answer your calls, follow up your leads and run the busywork.',
+  heroLede: 'I’m Ezekiel. I build AI voice agents, automated workflows and connected CRMs for businesses, and I produce product ads and cinematic video with AI.',
+  heroServices: ['Voice agents', 'Workflow automation', 'CRM', 'Integrations', 'AI video'],
   intro:
     'I help businesses automate operations, connect the software they already use, and tell their story with AI-made video. From voice agents that answer the phone to cinematic product ads, I turn a business problem into a system that runs.',
   tagline: ['Automate smarter.', 'Integrate better.', 'Create without limits.'],
@@ -212,6 +218,8 @@ export const projects: Project[] = [
     idea: 'Give the phone line its own assistant that speaks first, sounds like the front desk and works in English or Spanish, with the booking system wired straight into the call.',
     shipped: 'A published Vapi assistant with a written persona and style guide, plus four live Make.com scenarios behind it: availability check, booking, booking link by email and a summary of every call.',
     cover: img('vapi-receptionist', 1121, 897, 'Vapi assistant settings for the receptionist, with the first message and system prompt (client details blurred)'),
+    result: 'Calls are picked up the moment they come in, including after hours, in English or Spanish. Appointments go straight into the booking system and every call ends with a written summary.',
+    featured: true,
     gallery: [
       img('make-booking-scenarios', 1400, 452, 'Four active Make.com scenarios: CheckAvailability, Create Booking, End of call Summary, Send booking link', 'The four scenarios the assistant calls during a conversation'),
       img('make-voice-booking-flow', 1226, 273, 'Make.com scenario with branches that read a sheet, call OpenAI and send results back by webhook', 'Booking logic: sheet lookup, OpenAI parsing, branch by result'),
@@ -230,6 +238,7 @@ export const projects: Project[] = [
     context: 'Following up with every lead by phone takes hours, and most of those calls end without a fit.',
     idea: 'Let an agent make the first call, ask the qualifying questions, and pass only the right prospects to a person.',
     shipped: 'An outbound calling system that engages prospects, identifies their needs, qualifies them and transfers suitable conversations to the right team member.',
+    result: 'The first call to every lead happens without anyone dialling. The team only spends time on prospects who are already qualified.',
     gallery: [],
     placeholderMedia: true,
   },
@@ -247,6 +256,7 @@ export const projects: Project[] = [
     idea: 'Let the CRM decide: each new contact is checked for its stage, and a branch adds it to the right nurture workflow.',
     shipped: 'An automated workflow that captures information, updates contact records, manages opportunities and triggers the follow-up for each stage.',
     cover: img('ghl-workflow', 610, 385, 'CRM workflow builder: a condition checks whether a contact is in communication and branches to add them to a workflow'),
+    result: 'No lead sits untouched: each new contact is recorded and placed in the right follow-up sequence the moment it arrives.',
     gallery: [],
   },
   {
@@ -263,6 +273,7 @@ export const projects: Project[] = [
     idea: 'Route each message by type, turn it into text with OpenAI, then let one knowledge-base agent with memory and vector search write the reply.',
     shipped: 'An n8n workflow with separate branches for text, voice, image and document messages, merging into a retrieval-augmented agent that replies in the same chat.',
     cover: img('n8n-whatsapp-rag', 1080, 407, 'n8n workflow: WhatsApp trigger routes text, voice, image and document messages into a knowledge-base agent with vector search'),
+    result: 'Customers get an answer in the same chat whether they type, send a voice note, a photo or a PDF, using the business’s own information.',
     gallery: [
       img('make-instagram', 1080, 534, 'Make.com scenario: Google Sheets to Airtable to Instagram photo post', 'Related build: scheduled Instagram posting from a sheet'),
     ],
@@ -281,6 +292,8 @@ export const projects: Project[] = [
     idea: 'Direct it like film: break the idea into a shot-by-shot visual flow first, lock the subject and the lighting, then generate and cut on movement.',
     shipped: 'A 15-second cinematic piece of a leopard stalking out of a steel vault, and a 30-second coffee sequence that follows the bean from roast to the pour.',
     cover: vid('leopard', 1280, 720, 'A leopard walks out of a dark steel vault toward the camera, lit from above'),
+    result: 'Films that hold together like a single shoot: the same subject, light and camera language from the first frame to the last.',
+    featured: true,
     gallery: [
       vid('coffee', 640, 360, 'Coffee beans, ground coffee, capsules and an espresso pouring into a cup', 'Coffee process: roast, grind, capsule, pour'),
     ],
@@ -299,6 +312,7 @@ export const projects: Project[] = [
     idea: 'Treat every product like a studio shoot: a hero angle, a material close-up, the product in use, then a clean end card with the name and one line.',
     shipped: 'A set of short ads: a perfume bottle rising out of water, AURA wireless earbuds and a smartwatch in studio light, a mascara spot, and an earbuds lifestyle ad with on-screen titles.',
     cover: vid('perfume', 1280, 720, 'A blue perfume bottle on wet rock with water splashing around it'),
+    result: 'A library of ready-to-post ads for several products, made without a studio, a model or a crew.',
     gallery: [
       vid('earbuds', 1280, 720, 'AURA wireless earbuds case on a dark studio surface with the product name', 'AURA earbuds: studio spot with end card'),
       vid('watch', 1280, 720, 'Close-up of a black smartwatch face in soft daylight', 'AURA watch: material close-ups to wrist shot'),
@@ -320,8 +334,22 @@ export const projects: Project[] = [
     idea: 'Build a reusable studio: an AI anchor, a consistent set and a branded layout, so each new script becomes a finished segment.',
     shipped: 'Presenter segments in a news-desk layout, with a story panel beside the anchor and a headline lower third.',
     cover: vid('presenter', 1280, 720, 'An AI news anchor standing at a glass desk in a blue television studio'),
+    result: 'A repeatable studio: each new script becomes a finished news-style segment without filming anyone.',
     gallery: [
       vid('presenter-eu', 1280, 720, 'Split layout with a meeting room on the left and an AI anchor on the right, above a headline bar', 'News-desk layout with story panel and headline'),
     ],
   },
+];
+
+// AI video reel on the homepage: every finished clip, the strongest first.
+export const reel: (Shot & { title: string; project: string })[] = [
+  { ...vid('leopard', 1280, 720, 'A leopard walks out of a dark steel vault toward the camera, lit from above'), title: 'The vault', project: 'ai-cinematic-video' },
+  { ...vid('perfume', 1280, 720, 'A blue perfume bottle on wet rock with water splashing around it'), title: 'Perfume ad', project: 'ai-product-ads' },
+  { ...vid('presenter', 1280, 720, 'An AI news anchor standing at a glass desk in a blue television studio'), title: 'AI news anchor', project: 'ai-avatar-presenters' },
+  { ...vid('earbuds', 1280, 720, 'AURA wireless earbuds case on a dark studio surface with the product name'), title: 'AURA earbuds', project: 'ai-product-ads' },
+  { ...vid('coffee', 640, 360, 'Coffee beans, ground coffee, capsules and an espresso pouring into a cup'), title: 'From bean to cup', project: 'ai-cinematic-video' },
+  { ...vid('watch', 1280, 720, 'Close-up of a black smartwatch face in soft daylight'), title: 'AURA watch', project: 'ai-product-ads' },
+  { ...vid('earbuds-lifestyle', 1280, 720, 'A woman working at a cafe laptop wearing white earbuds, with on-screen titles'), title: 'Earbuds lifestyle ad', project: 'ai-product-ads' },
+  { ...vid('presenter-eu', 1280, 720, 'Split layout with a meeting room on the left and an AI anchor on the right, above a headline bar'), title: 'News desk with story panel', project: 'ai-avatar-presenters' },
+  { ...vid('mascara', 752, 416, 'A hand opening a brown mascara tube to show the brush'), title: 'Mascara spot', project: 'ai-product-ads' },
 ];

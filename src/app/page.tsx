@@ -3,7 +3,8 @@ import { Eyebrow } from '@/components/Eyebrow';
 import { Btn } from '@/components/Btn';
 import { ContactForm } from '@/components/ContactForm';
 import { Booking } from '@/components/Booking';
-import { about, automation, clientWork, creative, handover, process, projects, site, testimonial, tools, workbench } from '@/data/site';
+import { Reel } from '@/components/Reel';
+import { about, automation, clientWork, creative, handover, process, projects, reel, site, testimonial, tools, workbench } from '@/data/site';
 
 export default function Home() {
   return (
@@ -12,18 +13,17 @@ export default function Home() {
       <section className="hero wrap" aria-labelledby="hero-title">
         <div className="grid hero__grid">
           <div className="hero__text">
-            <h1 id="hero-title" className="hero__name voice-auto">
-              <span className="mask"><span className="rise">Ezekiel Efemena</span></span>{' '}
-              <span className="mask"><span className="rise" style={{ animationDelay: '0.08s' }}>Atevafo</span></span>
+            <p className="hero__who enter">{site.name} <span className="muted">· {site.location}</span></p>
+            <h1 id="hero-title" className="hero__title voice-auto">
+              <span className="mask"><span className="rise">{site.heroTitle}</span></span>
             </h1>
-            <p className="hero__roles mono enter" style={{ animationDelay: '0.3s' }}>
-              <span>{site.roleA}</span>
-              <span>{site.roleB}</span>
-            </p>
-            <p className="hero__lede enter" style={{ animationDelay: '0.4s' }}>{site.headline}</p>
+            <p className="hero__lede enter" style={{ animationDelay: '0.3s' }}>{site.heroLede}</p>
+            <ul className="hero__services mono enter" style={{ animationDelay: '0.4s' }} aria-label="Services">
+              {site.heroServices.map((x) => <li key={x}>{x}</li>)}
+            </ul>
             <div className="hero__cta enter" style={{ animationDelay: '0.5s' }}>
-              <Btn href="#work">Explore my work</Btn>
-              <Btn href="#contact" ghost>Let’s work together</Btn>
+              <Btn href="#contact">Book a free 15-minute audit</Btn>
+              <Btn href="#work" ghost>See my work</Btn>
             </div>
           </div>
           <figure className="hero__portrait open">
@@ -32,10 +32,6 @@ export default function Home() {
                 sizes="(max-width: 900px) 90vw, 30vw" loading="eager" fetchPriority="high" data-critical unoptimized />
             </div>
           </figure>
-        </div>
-        <div className="hero__meta mono">
-          <span>{site.location}</span>
-          <span>Freelancing since {site.since}</span>
         </div>
       </section>
 
@@ -114,18 +110,35 @@ export default function Home() {
         <div className="sec-head">
           <Eyebrow>Selected work</Eyebrow>
           <h2 id="work-title" className="h2 voice-auto" data-split="lines">Turning ideas into working solutions.</h2>
-          <p className="lede muted" data-reveal="up">Automation systems, AI-powered business tools and creative production, each one a real build.</p>
+          <p className="lede muted" data-reveal="up">Real builds for real businesses. Start with these two.</p>
         </div>
+        <ul className="feat" style={{ padding: 0 }}>
+          {projects.filter((p) => p.featured).map((p) => (
+            <li key={p.slug} style={{ listStyle: 'none' }} className={p.branch === 'Creative' ? 'lane-create' : undefined} data-reveal="up">
+              <a className="feat__card" href={`/work/${p.slug}/`}>
+                <span className="feat__media">
+                  {p.cover && <Image src={p.cover.src} alt="" width={p.cover.w} height={p.cover.h} sizes="(max-width: 900px) 92vw, 46vw" unoptimized />}
+                  {p.cover?.video && <span className="feat__play mono" aria-hidden="true">▶ Video</span>}
+                </span>
+                <span className="feat__meta mono"><span style={{ color: 'var(--lane)' }}>{p.branch === 'Creative' ? 'AI video' : 'AI automation'}</span><span className="muted">{p.stack.slice(0, 3).join(', ')}</span></span>
+                <span className={`feat__t ${p.branch === 'Creative' ? 'voice-create' : 'voice-auto'}`}>{p.title}</span>
+                <span className="feat__s">{p.summary}</span>
+                <span className="feat__cta">View case study <span className="feat__arr" aria-hidden="true">→</span></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <h3 className="mono muted more__label">More projects</h3>
         <div className="log" data-index>
           <div className="log__head mono" aria-hidden="true"><span>#</span><span>Project</span><span>Category</span><span>Tools</span></div>
           <ul style={{ padding: 0 }}>
-            {projects.map((p) => (
+            {projects.filter((p) => !p.featured).map((p) => (
               <li key={p.slug} style={{ listStyle: 'none' }} className={p.branch === 'Creative' ? 'lane-create' : undefined}>
                 <a className="row" href={`/work/${p.slug}/`} data-title={p.short} data-branch={p.branch}
                   data-preview={p.cover?.src} data-chain={p.category}>
                   <span className="mono muted">{p.n}</span>
                   <span className={`row__t ${p.branch === 'Creative' ? 'voice-create' : 'voice-auto'}`}>{p.title}</span>
-                  <span className="row__branch mono" style={{ color: 'var(--lane)' }}>{p.branch}</span>
+                  <span className="row__branch mono" style={{ color: 'var(--lane)' }}>{p.branch === 'Creative' ? 'AI video' : 'AI automation'}</span>
                   <span className="row__stack mono muted">{p.stack.slice(0, 3).join(', ')}</span>
                   <span className="row__thumb" aria-hidden="true">
                     {p.cover ? <Image src={p.cover.src} alt="" width={p.cover.w} height={p.cover.h} sizes="90vw" unoptimized />
@@ -144,6 +157,16 @@ export default function Home() {
           </div>
           <span className="preview__cap mono" />
         </div>
+      </section>
+
+      {/* AI VIDEO */}
+      <section id="video" className="reel-sec wrap lane-create" aria-labelledby="reel-title">
+        <div className="sec-head">
+          <Eyebrow>AI video studio</Eyebrow>
+          <h2 id="reel-title" className="h2 voice-create" data-split="lines">Video, directed shot by shot.</h2>
+          <p className="lede muted" data-reveal="up">Product ads, cinematic shorts and AI presenters, all made with AI. Press any clip to watch it with sound.</p>
+        </div>
+        <Reel items={reel} />
       </section>
 
       {/* TESTIMONIAL: a client, on camera */}
