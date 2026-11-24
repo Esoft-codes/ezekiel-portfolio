@@ -38,13 +38,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <a className="skip-link" href="#main">Skip to content</a>
-        <div className="wire" aria-hidden="true" />
-        <div className="wire__lit" aria-hidden="true" />
-        <div className="pulse" aria-hidden="true"><span className="pulse__ring" /></div>
         <div id="curtain" aria-hidden="true">
           <div className="curtain__panel" />
-          <div className="curtain__wire" />
-          <span className="curtain__label mono">Running next node</span>
         </div>
         <Header />
         <main id="main" tabIndex={-1}>{children}</main>

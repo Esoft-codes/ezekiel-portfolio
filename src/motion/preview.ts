@@ -1,4 +1,4 @@
-// Execution log: a floating preview of the real build follows the pointer (fine pointers only).
+// Project list: a floating preview of the real build follows the pointer (fine pointers only).
 import { gsap } from 'gsap';
 import { onPage, onScroll, isTouch } from '@/engine';
 

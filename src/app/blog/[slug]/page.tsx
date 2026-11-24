@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Node } from '@/components/Node';
+import { Eyebrow } from '@/components/Eyebrow';
 import { fmtDate, getPost, getPosts } from '@/lib/blog';
 import { site } from '@/data/site';
 
@@ -35,7 +35,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   return (
     <article className="post wrap">
       <header className="post__head">
-        <Node type="Log" name={fmtDate(p.date)} ms={`${p.minutes} min`} />
+        <Eyebrow>{fmtDate(p.date)} · {p.minutes} min read</Eyebrow>
         <h1 className="post__title voice-auto"><span className="mask"><span className="rise">{p.title}</span></span></h1>
         <p className="lede enter" style={{ animationDelay: '0.2s' }}>{p.description}</p>
         <p className="mono muted enter" style={{ animationDelay: '0.3s' }}>

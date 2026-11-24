@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Node } from '@/components/Node';
+import { Eyebrow } from '@/components/Eyebrow';
 import { Btn } from '@/components/Btn';
 import { ContactForm } from '@/components/ContactForm';
 import { Booking } from '@/components/Booking';
@@ -8,9 +8,8 @@ import { about, automation, clientWork, creative, handover, process, projects, s
 export default function Home() {
   return (
     <>
-      {/* HERO: the trigger */}
+      {/* HERO */}
       <section className="hero wrap" aria-labelledby="hero-title">
-        <Node type="Trigger" name="New visitor" ms="0.1s" />
         <div className="grid hero__grid">
           <div className="hero__text">
             <h1 id="hero-title" className="hero__name voice-auto">
@@ -27,8 +26,7 @@ export default function Home() {
               <Btn href="#contact" ghost>Let’s work together</Btn>
             </div>
           </div>
-          <figure className="hero__portrait out open">
-            <figcaption className="out__bar mono"><span>Output</span><span>1 item</span></figcaption>
+          <figure className="hero__portrait open">
             <div className="out__frame">
               <Image src="/img/portrait.webp" alt="Portrait of Ezekiel Efemena Atevafo in a navy three-piece suit" width={960} height={1200}
                 sizes="(max-width: 900px) 90vw, 30vw" loading="eager" fetchPriority="high" data-critical unoptimized />
@@ -43,7 +41,7 @@ export default function Home() {
 
       {/* TAGLINE: one family, two personalities */}
       <section className="wrap" aria-label="Tagline">
-        <Node type="Set" name="Approach" ms="0.2s" />
+        <Eyebrow>My approach</Eyebrow>
         <p className="tagline">
           <span className="t1" data-split="lines">{site.tagline[0]}</span>
           <span className="t2" data-split="lines" data-delay="0.08">{site.tagline[1]}</span>
@@ -54,7 +52,7 @@ export default function Home() {
 
       {/* ABOUT */}
       <section id="about" className="about wrap" aria-labelledby="about-title">
-        <div className="sec-head"><Node type="Agent" name="About me" ms="0.4s" /></div>
+        <div className="sec-head"><Eyebrow>About me</Eyebrow></div>
         <div className="grid">
           <div className="about__img" data-reveal="clip">
             <Image src="/img/portrait-street.webp" alt="Ezekiel Efemena Atevafo standing in an office, hand in pocket, in a navy suit" width={960} height={1200}
@@ -73,16 +71,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SERVICES: router into two lanes */}
+      {/* SERVICES */}
       <section id="services" className="services wrap" aria-labelledby="services-title">
         <div className="sec-head">
-          <Node type="Router" name="What I do · 2 branches" ms="0.1s" />
-          <h2 id="services-title" className="h2 voice-auto" data-split="lines">Two branches, one practice.</h2>
+          <Eyebrow>Services</Eyebrow>
+          <h2 id="services-title" className="h2 voice-auto" data-split="lines">Two disciplines, one practice.</h2>
         </div>
         <div className="lanes">
           <div className="lane">
             <div className="lane__head">
-              <Node type="Branch 1" name="Automation and business systems" ms="1.2s" free />
               <h3 className="lane__title voice-auto">AI automation and business systems</h3>
               <p className="muted body-copy">Intelligent automation that cuts manual work, keeps operations moving and makes teams more productive.</p>
             </div>
@@ -99,7 +96,6 @@ export default function Home() {
           </div>
           <div className="lane lane-create">
             <div className="lane__head">
-              <Node type="Branch 2" name="Creative production" ms="2.4s" lane="create" free />
               <h3 className="lane__title voice-create">AI creative production</h3>
               <p className="muted body-copy">AI-powered video that turns ideas, products and stories into something people watch.</p>
             </div>
@@ -113,25 +109,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* WORK: execution log */}
+      {/* WORK */}
       <section id="work" className="work wrap" aria-labelledby="work-title">
         <div className="sec-head">
-          <Node type="Merge" name={`Selected work · ${projects.length} executions`} ms="0.3s" />
+          <Eyebrow>Selected work</Eyebrow>
           <h2 id="work-title" className="h2 voice-auto" data-split="lines">Turning ideas into working solutions.</h2>
           <p className="lede muted" data-reveal="up">Automation systems, AI-powered business tools and creative production, each one a real build.</p>
         </div>
         <div className="log" data-index>
-          <div className="log__head mono" aria-hidden="true"><span>#</span><span>Project</span><span>Branch</span><span>Stack</span><span>Status</span></div>
+          <div className="log__head mono" aria-hidden="true"><span>#</span><span>Project</span><span>Category</span><span>Tools</span></div>
           <ul style={{ padding: 0 }}>
             {projects.map((p) => (
               <li key={p.slug} style={{ listStyle: 'none' }} className={p.branch === 'Creative' ? 'lane-create' : undefined}>
                 <a className="row" href={`/work/${p.slug}/`} data-title={p.short} data-branch={p.branch}
-                  data-preview={p.cover?.src} data-chain={p.chain.join(' → ')}>
+                  data-preview={p.cover?.src} data-chain={p.category}>
                   <span className="mono muted">{p.n}</span>
                   <span className={`row__t ${p.branch === 'Creative' ? 'voice-create' : 'voice-auto'}`}>{p.title}</span>
                   <span className="row__branch mono" style={{ color: 'var(--lane)' }}>{p.branch}</span>
                   <span className="row__stack mono muted">{p.stack.slice(0, 3).join(', ')}</span>
-                  <span className="row__status mono"><i aria-hidden="true" />Success</span>
                   <span className="row__thumb" aria-hidden="true">
                     {p.cover ? <Image src={p.cover.src} alt="" width={p.cover.w} height={p.cover.h} sizes="90vw" unoptimized />
                       : <span className={`tc ${p.branch === 'Creative' ? 'voice-create' : 'voice-auto'}`} style={{ color: 'var(--lane)' }}>{p.short}</span>}
@@ -154,7 +149,7 @@ export default function Home() {
       {/* TESTIMONIAL: a client, on camera */}
       <section className="voice wrap" aria-labelledby="voice-title">
         <div className="sec-head">
-          <Node type="Webhook" name="Client feedback received" ms="0.4s" />
+          <Eyebrow>Testimonials</Eyebrow>
           <h2 id="voice-title" className="h2 voice-auto" data-split="lines">What clients say.</h2>
         </div>
         <div className="grid voice__grid">
@@ -198,8 +193,8 @@ export default function Home() {
       {/* WORKBENCH: real screens */}
       <section className="bench wrap" aria-labelledby="bench-title">
         <div className="sec-head">
-          <Node type="Code" name="From the workbench" ms="0.6s" />
-          <h2 id="bench-title" className="h2 voice-auto" data-split="lines">More builds, straight from the canvas.</h2>
+          <Eyebrow>Behind the scenes</Eyebrow>
+          <h2 id="bench-title" className="h2 voice-auto" data-split="lines">A closer look at the builds.</h2>
         </div>
         <div className="bench__wall">
           {workbench.map((s) => (
@@ -214,14 +209,13 @@ export default function Home() {
       {/* PROCESS */}
       <section className="process wrap" aria-labelledby="process-title">
         <div className="sec-head">
-          <Node type="Loop" name="How I work · 4 steps" ms="0.8s" />
+          <Eyebrow>How I work</Eyebrow>
           <h2 id="process-title" className="h2 voice-auto" data-split="lines">From business challenge to working solution.</h2>
         </div>
         <ol className="chain" style={{ padding: 0 }}>
           {process.map((s, i) => (
             <li className="step" key={s.title} style={{ listStyle: 'none' }} data-reveal="up" data-delay={String(i * 0.08)}>
-              <span className="step__dot" aria-hidden="true" />
-              <span className="mono muted">Step {i + 1}</span>
+              <span className="step__n mono">{String(i + 1).padStart(2, '0')}</span>
               <h3 className="voice-auto">{s.title}</h3>
               <p>{s.text}</p>
             </li>
@@ -243,7 +237,7 @@ export default function Home() {
       {/* TOOLS */}
       <section className="tools wrap" aria-labelledby="tools-title">
         <div className="sec-head">
-          <Node type="Credentials" name="Tools connected" ms="0.1s" />
+          <Eyebrow>Tools</Eyebrow>
           <h2 id="tools-title" className="h2 voice-auto" data-split="lines">The technology behind the work.</h2>
         </div>
         <div className="tools__grid" data-reveal="up">
@@ -256,10 +250,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CONTACT: send email */}
+      {/* CONTACT */}
       <section id="contact" className="contact wrap" aria-labelledby="contact-title">
         <div className="sec-head" style={{ marginBottom: 0 }}>
-          <Node type="Send email" name="To Ezekiel" ms="0.3s" />
+          <Eyebrow>Contact</Eyebrow>
           <h2 id="contact-title" className="contact__q voice-auto" data-split="lines">Have a process to automate or an idea to bring to life?</h2>
         </div>
         <div className="grid contact__grid">
@@ -273,7 +267,6 @@ export default function Home() {
         </div>
         {site.bookingUrl && <Booking url={site.bookingUrl} />}
         <footer className="footer mono">
-          <span>Workflow finished · status success</span>
           <span>© 2026 {site.name}</span>
           <span>{site.location}</span>
         </footer>

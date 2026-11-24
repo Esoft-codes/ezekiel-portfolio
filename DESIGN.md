@@ -68,3 +68,6 @@ Idle: the wire's dashes keep flowing (data in transit) and the pulse breathes. S
 ## Genericness test
 - "Dark AI portfolio with blue glow and portrait" is what a generic model would make. Changed: no glow, no gradient blob, no cards grid; the structure is a workflow, the work list is an execution log, the 404 is a node error.
 - Services are not 12 equal cards: two lanes with different type widths.
+
+## Update 2026-11-24
+Owner asked for a standard portfolio look. Removed the workflow concept: wire, pulse, node chips, dot-grid canvas, execution-log wording, "Running next node" transition label, n8n-style 404. Sections now use plain uppercase labels (Eyebrow component).

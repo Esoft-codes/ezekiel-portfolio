@@ -25,7 +25,7 @@
   --u: clamp(0.5rem, 0.35rem + 0.6vw, 1rem);
   --gutter: clamp(1rem, 0.6rem + 1.6vw, 2.5rem);
   --wire-x: calc(var(--gutter) * 0.75);
-  --pad-l: calc(var(--wire-x) + clamp(1.5rem, 1rem + 2vw, 3.5rem));
+  --pad-l: var(--gutter);
   --cols: 12;
   --radius: 0px;
   --r-node: 10px;

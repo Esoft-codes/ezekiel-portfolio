@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Node } from '@/components/Node';
+import { Eyebrow } from '@/components/Eyebrow';
 import { fmtDate, getPosts } from '@/lib/blog';
 
 export const metadata: Metadata = {
@@ -14,7 +14,7 @@ export default function Blog() {
   return (
     <section className="blog wrap" aria-labelledby="blog-title">
       <div className="sec-head">
-        <Node type="Logs" name={`Blog · ${posts.length} ${posts.length === 1 ? 'entry' : 'entries'}`} ms="0.2s" />
+        <Eyebrow>Blog · {posts.length} {posts.length === 1 ? 'post' : 'posts'}</Eyebrow>
         <h1 id="blog-title" className="h2 voice-auto"><span className="mask"><span className="rise">Notes from the workflow.</span></span></h1>
         <p className="lede muted enter" style={{ animationDelay: '0.2s' }}>What I build with AI automation and AI video, how I build it, and what I learn along the way.</p>
       </div>
