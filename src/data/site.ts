@@ -42,7 +42,7 @@ export const site = {
     'Ezekiel Efemena Atevafo builds AI voice agents, automated workflows and connected CRMs, and produces AI video for brands. Based in Lagos, working worldwide.',
   email: 'ezekielefemena0@gmail.com',
   linkedin: 'https://www.linkedin.com/in/ezekiel-efemena-b3b007354',
-  location: 'Lagos, Nigeria',
+  location: 'Lagos, Africa',
   // Contact: paste your links here. Empty values keep the old behaviour.
   // bookingUrl: Calendly event link shown as the inline booking calendar
   bookingUrl: 'https://calendly.com/ezekielefemena0/free-15-minute-automation-audit',
