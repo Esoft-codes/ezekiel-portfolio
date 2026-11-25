@@ -82,7 +82,7 @@ export function VoiceDemo({ publicKey, assistantId }: { publicKey: string; assis
               {state === 'live' && (talking ? 'Ava is speaking' : 'Listening')}
               {state === 'ended' && 'Call ended. Try it again any time.'}
               {state === 'error' && 'Could not connect. Please try again in a moment.'}
-              {state === 'nomic' && 'No microphone found on this device. Try on your phone.'}
+              {state === 'nomic' && 'This browser can’t reach a microphone.'}
               {state === 'blocked' && 'Your browser is blocking the microphone for this site.'}
             </span>
           </span>
@@ -101,6 +101,9 @@ export function VoiceDemo({ publicKey, assistantId }: { publicKey: string; assis
             </>
           )}
         </div>
+        {state === 'nomic' && (
+          <p className="vd__help">Open this page in Chrome, Edge or Safari and press the button again; your browser will ask to use the microphone. If it still fails on a laptop, check the microphone is switched on and that your computer’s privacy settings let the browser use it.</p>
+        )}
         {state === 'blocked' && (
           <p className="vd__help">To turn it back on, click the lock or settings icon at the left of the address bar, set <b>Microphone</b> to <b>Allow</b>, then press Try again. On a phone, allow the microphone for your browser in the phone’s settings.</p>
         )}
