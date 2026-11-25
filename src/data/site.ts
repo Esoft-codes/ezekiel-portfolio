@@ -44,6 +44,8 @@ export const site = {
   linkedin: 'https://www.linkedin.com/in/ezekiel-efemena-b3b007354',
   location: 'Lagos, Africa',
   // Contact: paste your links here. Empty values keep the old behaviour.
+  // Live voice demo (Vapi web call). The public key is meant to be visible in the browser.
+  voiceDemo: { publicKey: 'c83b1a9c-905e-416c-93a7-f70c02d523a8', assistantId: 'aed17f55-7e7a-450a-b8fd-6d1e3180b98c' },
   // bookingUrl: Calendly event link shown as the inline booking calendar
   bookingUrl: 'https://calendly.com/ezekielefemena0/free-15-minute-automation-audit',
   // formWebhook: your n8n or Make webhook URL that receives contact form submissions

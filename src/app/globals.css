@@ -495,3 +495,30 @@ html.frame-away .header { translate: 0 -110%; }
   .nav .draw[href="/#about"] { display: none; }
   .talk { padding: 0.5em 0.8em; }
 }
+
+/* ---------- Live voice demo ---------- */
+.demo { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--gutter); align-items: start; padding-block: calc(var(--u) * 8); }
+.demo__text { display: grid; gap: calc(var(--u) * 2); }
+.demo__note { font-size: var(--t-xs, 0.8rem); }
+.vd { display: grid; gap: 1rem; }
+.vd__panel { display: grid; gap: 1.2rem; padding: 1.5rem; border: 1px solid var(--c-line); border-radius: 12px; background: var(--c-node); }
+.vd__who { display: flex; gap: 1rem; align-items: center; }
+.vd__who > span:last-child { display: grid; gap: 0.2rem; }
+.vd__name { font-weight: 600; font-size: var(--t-m); }
+.vd__status { color: var(--c-muted); }
+.vd__orb { position: relative; width: 3.4rem; height: 3.4rem; flex: none; border-radius: 50%; background: var(--c-auto); display: flex; align-items: center; justify-content: center; gap: 3px; }
+.vd__orb i { width: 4px; height: 10px; border-radius: 2px; background: var(--c-bg); transition: height 0.2s; }
+.vd.is-talking .vd__orb i { animation: vd-bar 0.9s ease-in-out infinite; }
+.vd.is-talking .vd__orb i:nth-child(2) { animation-delay: 0.15s; }
+.vd.is-talking .vd__orb i:nth-child(3) { animation-delay: 0.3s; }
+.vd.is-live .vd__orb { outline: 2px solid var(--c-auto); outline-offset: 4px; }
+@keyframes vd-bar { 0%, 100% { height: 8px; } 50% { height: 22px; } }
+@media (prefers-reduced-motion: reduce) { .vd.is-talking .vd__orb i { animation: none; height: 16px; } }
+.vd__ctl { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.vd__log { max-height: 15rem; overflow-y: auto; display: grid; gap: 0.6rem; padding-top: 1rem; border-top: 1px solid var(--c-line); }
+.vd__line { display: grid; gap: 0.15rem; }
+.vd__line span { color: var(--c-muted); font-size: 0.75rem; }
+.vd__line--assistant span { color: var(--c-auto); }
+.vd__try { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0; }
+.vd__try li { list-style: none; border: 1px solid var(--c-line); border-radius: 999px; padding: 0.35em 0.9em; color: var(--c-muted); font-size: 0.9rem; }
+@media (max-width: 900px) { .demo { grid-template-columns: minmax(0, 1fr); } }

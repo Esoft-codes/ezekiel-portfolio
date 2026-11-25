@@ -4,6 +4,7 @@ import { Btn } from '@/components/Btn';
 import { ContactForm } from '@/components/ContactForm';
 import { Booking } from '@/components/Booking';
 import { Reel } from '@/components/Reel';
+import { VoiceDemo } from '@/components/VoiceDemo';
 import { about, automation, clientWork, creative, handover, process, projects, reel, site, testimonial, tools, workbench } from '@/data/site';
 
 export default function Home() {
@@ -158,6 +159,19 @@ export default function Home() {
           <span className="preview__cap mono" />
         </div>
       </section>
+
+      {/* LIVE VOICE DEMO */}
+      {site.voiceDemo.publicKey && site.voiceDemo.assistantId && (
+        <section id="demo" className="demo wrap" aria-labelledby="demo-title">
+          <div className="demo__text">
+            <Eyebrow>Live demo</Eyebrow>
+            <h2 id="demo-title" className="h2 voice-auto" data-split="lines">Call my AI receptionist.</h2>
+            <p className="lede muted" data-reveal="up">Ava answers the phone for Maple Grove Dental. Ask about prices, book a cleaning or say you have a toothache. She runs on the same setup I build for clients.</p>
+            <p className="mono muted demo__note">Uses your microphone. Calls last up to 3 minutes. Maple Grove Dental is a made-up clinic.</p>
+          </div>
+          <VoiceDemo publicKey={site.voiceDemo.publicKey} assistantId={site.voiceDemo.assistantId} />
+        </section>
+      )}
 
       {/* AI VIDEO */}
       <section id="video" className="reel-sec wrap lane-create" aria-labelledby="reel-title">
