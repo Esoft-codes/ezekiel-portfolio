@@ -522,3 +522,4 @@ html.frame-away .header { translate: 0 -110%; }
 .vd__try { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0; }
 .vd__try li { list-style: none; border: 1px solid var(--c-line); border-radius: 999px; padding: 0.35em 0.9em; color: var(--c-muted); font-size: 0.9rem; }
 @media (max-width: 900px) { .demo { grid-template-columns: minmax(0, 1fr); } }
+.vd__help { color: var(--c-fg); font-size: 0.95rem; border-left: 2px solid var(--c-auto); border-radius: 0; padding-left: 0.9rem; }

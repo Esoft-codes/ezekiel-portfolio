@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
-type State = 'idle' | 'connecting' | 'live' | 'ended' | 'error' | 'nomic';
+type State = 'idle' | 'connecting' | 'live' | 'ended' | 'error' | 'nomic' | 'blocked' | 'asking';
 type Line = { role: 'assistant' | 'user'; text: string };
 type VapiLike = {
   start: (id: string) => Promise<unknown>;
@@ -23,15 +23,19 @@ export function VoiceDemo({ publicKey, assistantId }: { publicKey: string; assis
   useEffect(() => () => { vapi.current?.stop().catch(() => {}); }, []);
 
   const start = async () => {
-    setState('connecting');
     setLines([]);
+    // Ask for the microphone first, so the browser's permission pop-up appears straight away.
+    if (!navigator.mediaDevices?.getUserMedia) { setState('nomic'); return; }
+    setState('asking');
     try {
       const s = await navigator.mediaDevices.getUserMedia({ audio: true });
       s.getTracks().forEach((t) => t.stop());
-    } catch {
-      setState('nomic');
+    } catch (e) {
+      const name = (e as { name?: string })?.name;
+      setState(name === 'NotAllowedError' || name === 'SecurityError' ? 'blocked' : 'nomic');
       return;
     }
+    setState('connecting');
     try {
       if (!vapi.current) {
         const { default: Vapi } = await import('@vapi-ai/web');
@@ -73,21 +77,23 @@ export function VoiceDemo({ publicKey, assistantId }: { publicKey: string; assis
             <span className="vd__name">Ava, Maple Grove Dental</span>
             <span className="vd__status mono" role="status" aria-live="polite">
               {state === 'idle' && 'Ready when you are'}
-              {state === 'connecting' && 'Connecting… allow your microphone'}
+              {state === 'asking' && 'Allow the microphone in the pop-up to start the call'}
+              {state === 'connecting' && 'Connecting to Ava…'}
               {state === 'live' && (talking ? 'Ava is speaking' : 'Listening')}
               {state === 'ended' && 'Call ended. Try it again any time.'}
               {state === 'error' && 'Could not connect. Please try again in a moment.'}
-              {state === 'nomic' && 'No microphone access. Allow the microphone for this site, or try on your phone.'}
+              {state === 'nomic' && 'No microphone found on this device. Try on your phone.'}
+              {state === 'blocked' && 'Your browser is blocking the microphone for this site.'}
             </span>
           </span>
         </div>
         <div className="vd__ctl">
-          {!live && state !== 'connecting' && (
+          {!live && state !== 'connecting' && state !== 'asking' && (
             <button type="button" className="btn btn--solid vd__call" onClick={start}>
-              {state === 'ended' ? 'Call again' : state === 'nomic' || state === 'error' ? 'Try again' : 'Talk to the AI receptionist'}<span className="btn__arrow" aria-hidden="true">→</span>
+              {state === 'ended' ? 'Call again' : state === 'nomic' || state === 'error' || state === 'blocked' ? 'Try again' : 'Talk to the AI receptionist'}<span className="btn__arrow" aria-hidden="true">→</span>
             </button>
           )}
-          {state === 'connecting' && <button type="button" className="btn btn--ghost" disabled>Connecting…</button>}
+          {(state === 'connecting' || state === 'asking') && <button type="button" className="btn btn--ghost" disabled>{state === 'asking' ? 'Waiting for microphone…' : 'Connecting…'}</button>}
           {live && (
             <>
               <button type="button" className="btn btn--ghost" onClick={toggleMute} aria-pressed={muted}>{muted ? 'Unmute' : 'Mute'}</button>
@@ -95,6 +101,9 @@ export function VoiceDemo({ publicKey, assistantId }: { publicKey: string; assis
             </>
           )}
         </div>
+        {state === 'blocked' && (
+          <p className="vd__help">To turn it back on, click the lock or settings icon at the left of the address bar, set <b>Microphone</b> to <b>Allow</b>, then press Try again. On a phone, allow the microphone for your browser in the phone’s settings.</p>
+        )}
         {lines.length > 0 && (
           <div className="vd__log" ref={log} aria-label="Live transcript">
             {lines.map((l, i) => (
