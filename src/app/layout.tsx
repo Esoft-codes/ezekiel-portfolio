@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Header } from '@/components/Header';
 import { Motion } from '@/components/Motion';
 import { site } from '@/data/site';
+import { Analytics } from '@vercel/analytics/next';
 import { archivo, mono } from './fonts';
 import './globals.css';
 
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main" tabIndex={-1}>{children}</main>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
         <Motion />
+        <Analytics />
       </body>
     </html>
   );
