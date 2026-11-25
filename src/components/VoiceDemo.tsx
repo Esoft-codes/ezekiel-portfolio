@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
-type State = 'idle' | 'connecting' | 'live' | 'ended' | 'error';
+type State = 'idle' | 'connecting' | 'live' | 'ended' | 'error' | 'nomic';
 type Line = { role: 'assistant' | 'user'; text: string };
 type VapiLike = {
   start: (id: string) => Promise<unknown>;
@@ -25,6 +25,13 @@ export function VoiceDemo({ publicKey, assistantId }: { publicKey: string; assis
   const start = async () => {
     setState('connecting');
     setLines([]);
+    try {
+      const s = await navigator.mediaDevices.getUserMedia({ audio: true });
+      s.getTracks().forEach((t) => t.stop());
+    } catch {
+      setState('nomic');
+      return;
+    }
     try {
       if (!vapi.current) {
         const { default: Vapi } = await import('@vapi-ai/web');
@@ -69,14 +76,15 @@ export function VoiceDemo({ publicKey, assistantId }: { publicKey: string; assis
               {state === 'connecting' && 'Connecting… allow your microphone'}
               {state === 'live' && (talking ? 'Ava is speaking' : 'Listening')}
               {state === 'ended' && 'Call ended. Try it again any time.'}
-              {state === 'error' && 'Could not connect. Check your microphone and try again.'}
+              {state === 'error' && 'Could not connect. Please try again in a moment.'}
+              {state === 'nomic' && 'No microphone access. Allow the microphone for this site, or try on your phone.'}
             </span>
           </span>
         </div>
         <div className="vd__ctl">
           {!live && state !== 'connecting' && (
             <button type="button" className="btn btn--solid vd__call" onClick={start}>
-              {state === 'ended' ? 'Call again' : 'Talk to the AI receptionist'}<span className="btn__arrow" aria-hidden="true">→</span>
+              {state === 'ended' ? 'Call again' : state === 'nomic' || state === 'error' ? 'Try again' : 'Talk to the AI receptionist'}<span className="btn__arrow" aria-hidden="true">→</span>
             </button>
           )}
           {state === 'connecting' && <button type="button" className="btn btn--ghost" disabled>Connecting…</button>}
