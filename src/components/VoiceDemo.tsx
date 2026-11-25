@@ -16,6 +16,8 @@ export function VoiceDemo({ publicKey, assistantId }: { publicKey: string; assis
   const [muted, setMuted] = useState(false);
   const [talking, setTalking] = useState(false);
   const [lines, setLines] = useState<Line[]>([]);
+  const [detail, setDetail] = useState('');
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const vapi = useRef<VapiLike | null>(null);
   const log = useRef<HTMLDivElement>(null);
 
@@ -24,27 +26,32 @@ export function VoiceDemo({ publicKey, assistantId }: { publicKey: string; assis
 
   const start = async () => {
     setLines([]);
+    setDetail('');
     // Ask for the microphone first, so the browser's permission pop-up appears straight away.
-    if (!navigator.mediaDevices?.getUserMedia) { setState('nomic'); return; }
+    // Only a clear "blocked" answer stops here; anything else still tries the call.
     setState('asking');
-    try {
-      const s = await navigator.mediaDevices.getUserMedia({ audio: true });
-      s.getTracks().forEach((t) => t.stop());
-    } catch (e) {
-      const name = (e as { name?: string })?.name;
-      setState(name === 'NotAllowedError' || name === 'SecurityError' ? 'blocked' : 'nomic');
-      return;
+    if (navigator.mediaDevices?.getUserMedia) {
+      try {
+        const s = await navigator.mediaDevices.getUserMedia({ audio: true });
+        s.getTracks().forEach((t) => t.stop());
+      } catch (e) {
+        const name = (e as { name?: string })?.name || 'Error';
+        console.warn('[voice demo] microphone check:', name, e);
+        if (name === 'NotAllowedError' || name === 'SecurityError') { setState('blocked'); return; }
+        setDetail(name);
+      }
     }
     setState('connecting');
     try {
       if (!vapi.current) {
         const { default: Vapi } = await import('@vapi-ai/web');
         const v = new Vapi(publicKey) as unknown as VapiLike;
-        v.on('call-start', () => setState('live'));
+        v.on('call-start', () => { if (timer.current) clearTimeout(timer.current); setState('live'); });
+        v.on('call-start-failed', (x) => { console.warn('[voice demo] start failed', x); setState('error'); });
         v.on('call-end', () => { setState('ended'); setTalking(false); setMuted(false); });
         v.on('speech-start', () => setTalking(true));
         v.on('speech-end', () => setTalking(false));
-        v.on('error', () => setState((s) => (s === 'live' ? 'ended' : 'error')));
+        v.on('error', (x) => { console.warn('[voice demo] error', x); setState((s) => (s === 'live' ? 'ended' : 'error')); });
         v.on('message', (m) => {
           const msg = m as { type?: string; transcriptType?: string; role?: string; transcript?: string };
           if (msg?.type === 'transcript' && msg.transcriptType === 'final' && msg.transcript) {
@@ -58,8 +65,11 @@ export function VoiceDemo({ publicKey, assistantId }: { publicKey: string; assis
         });
         vapi.current = v;
       }
+      if (timer.current) clearTimeout(timer.current);
+      timer.current = setTimeout(() => { setState((s) => { if (s === 'connecting') { vapi.current?.stop().catch(() => {}); return 'error'; } return s; }); }, 25000);
       await vapi.current.start(assistantId);
-    } catch {
+    } catch (e) {
+      console.warn('[voice demo] could not start', e);
       setState('error');
     }
   };
@@ -81,7 +91,7 @@ export function VoiceDemo({ publicKey, assistantId }: { publicKey: string; assis
               {state === 'connecting' && 'Connecting to Ava…'}
               {state === 'live' && (talking ? 'Ava is speaking' : 'Listening')}
               {state === 'ended' && 'Call ended. Try it again any time.'}
-              {state === 'error' && 'Could not connect. Please try again in a moment.'}
+              {state === 'error' && `Could not connect${detail ? ` (microphone: ${detail})` : ''}. Check your microphone and try again.`}
               {state === 'nomic' && 'This browser can’t reach a microphone.'}
               {state === 'blocked' && 'Your browser is blocking the microphone for this site.'}
             </span>
