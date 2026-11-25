@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
-type State = 'idle' | 'connecting' | 'live' | 'ended' | 'error' | 'nomic' | 'blocked' | 'asking';
+type State = 'idle' | 'connecting' | 'live' | 'ended' | 'error' | 'nomic' | 'blocked' | 'asking' | 'inapp';
 type Line = { role: 'assistant' | 'user'; text: string };
 type VapiLike = {
   start: (id: string) => Promise<unknown>;
@@ -38,6 +38,8 @@ export function VoiceDemo({ publicKey, assistantId }: { publicKey: string; assis
         const name = (e as { name?: string })?.name || 'Error';
         console.warn('[voice demo] microphone check:', name, e);
         if (name === 'NotAllowedError' || name === 'SecurityError') { setState('blocked'); return; }
+        // Built-in browsers inside apps (Claude, LinkedIn, Instagram, Facebook) often have no microphone at all.
+        if (/Claude\/|Electron|FBAN|FBAV|Instagram|LinkedInApp|Line\/|; wv\)/.test(navigator.userAgent)) { setState('inapp'); return; }
         setDetail(name);
       }
     }
@@ -94,13 +96,14 @@ export function VoiceDemo({ publicKey, assistantId }: { publicKey: string; assis
               {state === 'error' && `Could not connect${detail ? ` (microphone: ${detail})` : ''}. Check your microphone and try again.`}
               {state === 'nomic' && 'This browser can’t reach a microphone.'}
               {state === 'blocked' && 'Your browser is blocking the microphone for this site.'}
+              {state === 'inapp' && 'This app’s built-in browser can’t use your microphone.'}
             </span>
           </span>
         </div>
         <div className="vd__ctl">
           {!live && state !== 'connecting' && state !== 'asking' && (
             <button type="button" className="btn btn--solid vd__call" onClick={start}>
-              {state === 'ended' ? 'Call again' : state === 'nomic' || state === 'error' || state === 'blocked' ? 'Try again' : 'Talk to the AI receptionist'}<span className="btn__arrow" aria-hidden="true">→</span>
+              {state === 'ended' ? 'Call again' : state === 'nomic' || state === 'error' || state === 'blocked' || state === 'inapp' ? 'Try again' : 'Talk to the AI receptionist'}<span className="btn__arrow" aria-hidden="true">→</span>
             </button>
           )}
           {(state === 'connecting' || state === 'asking') && <button type="button" className="btn btn--ghost" disabled>{state === 'asking' ? 'Waiting for microphone…' : 'Connecting…'}</button>}
@@ -111,6 +114,9 @@ export function VoiceDemo({ publicKey, assistantId }: { publicKey: string; assis
             </>
           )}
         </div>
+        {state === 'inapp' && (
+          <p className="vd__help">You’re viewing this page inside another app. Open it in Chrome, Edge or Safari and the call will ask for your microphone. <a className="link" href={typeof window !== 'undefined' ? window.location.href.split('#')[0] + '#demo' : '/#demo'} target="_blank" rel="noopener">Open in your browser ↗</a></p>
+        )}
         {state === 'nomic' && (
           <p className="vd__help">Open this page in Chrome, Edge or Safari and press the button again; your browser will ask to use the microphone. If it still fails on a laptop, check the microphone is switched on and that your computer’s privacy settings let the browser use it.</p>
         )}
